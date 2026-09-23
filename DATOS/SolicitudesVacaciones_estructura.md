@@ -6,42 +6,40 @@
 
 | Columna | Contenido | Tipo en Excel |
 |---|---|---|
+| Id | Identificador de la solicitud, `SOL-aaaammddhhmmss` | Texto |
 | Title | Motivo | Texto |
 | FechaInicio | Primer día, `aaaa-mm-dd` | Texto |
 | FechaFin | Último día, `aaaa-mm-dd` | Texto |
 | Dias | Días naturales | Número |
 | Tipo | Vacaciones · Asuntos propios · Formación | Texto |
-| Estado | Pendiente · Aprobada · Rechazada | Texto |
+| Estado | Pendiente · En revisión · Aprobada · Rechazada | Texto |
 | Solicitante | Correo del empleado | Texto |
 | Aprobador | Correo del responsable | Texto |
 | Comentarios | Texto libre | Texto |
 
 Power Apps añade por su cuenta una columna oculta `__PowerAppsId__` para identificar cada fila. No hay que crearla ni borrarla.
 
-## Lista de SharePoint «Solicitudes de vacaciones» (Prácticas 3.2, 4.1 y 4.2)
+## Tabla de Excel «Pedidos» (Práctica 3.1)
 
-Estructura usada a partir de la Sesión 3. Crea las columnas **sin espacios ni tildes** para que el nombre interno coincida con el que aparece en las fórmulas.
+`PedidosMaquinas_OneDrive.xlsx` contiene la tabla `Pedidos`, para el formulario de pedido de la Machine Ordering App.
 
-| Columna | Tipo | Configuración |
+| Columna | Contenido | Tipo en Excel |
 |---|---|---|
-| Title | Una línea de texto | Existe por defecto. Guarda el motivo |
-| FechaInicio | Fecha y hora | Solo fecha · obligatoria |
-| FechaFin | Fecha y hora | Solo fecha · obligatoria |
-| Dias | Número | 0 decimales |
-| Tipo | Elección | Vacaciones · Asuntos propios · Formación · predeterminado *Vacaciones* |
-| Estado | Elección | Pendiente · Aprobada · Rechazada · predeterminado *Pendiente* |
-| Solicitante | Persona | Una persona |
-| Aprobador | Persona | Una persona |
-| Comentarios | Varias líneas de texto | Texto sin formato |
+| Id | Identificador del pedido, `PED-aaaammddhhmmss` | Texto |
+| Title | Máquina | Texto |
+| Cantidad | Unidades | Número |
+| FechaDeseada | Fecha de entrega, `aaaa-mm-dd` | Texto |
+| Email | Correo de contacto | Texto |
+| Comentarios | Texto libre | Texto |
 
-`SolicitudesVacaciones_ejemplo.xlsx` contiene cinco filas de ejemplo para crear la lista. Si creas la lista con **+ Nuevo > Lista > Desde Excel**, revisa después el tipo de cada columna: `Tipo` y `Estado` deben ser de elección, y `Solicitante` y `Aprobador` hay que añadirlas a mano porque las columnas de persona no se importan desde Excel.
+## Estados de una solicitud
 
-## Lista «Pedidos máquinas» (Práctica 3.1)
-
-| Columna | Tipo |
+| Estado | Quién lo pone |
 |---|---|
-| Title | Una línea de texto (máquina) |
-| Cantidad | Número |
-| FechaDeseada | Fecha y hora (solo fecha) |
-| Email | Una línea de texto |
-| Comentarios | Varias líneas de texto |
+| Pendiente | La app, al crear la solicitud |
+| En revisión | El flujo de aprobación, al pedir la respuesta al responsable |
+| Aprobada · Rechazada | El flujo de aprobación, con la respuesta del responsable |
+
+## Si prefieres SharePoint
+
+El curso trabaja sobre Excel en OneDrive para no depender de un sitio de SharePoint ni de permisos de administrador. `SolicitudesVacaciones_ejemplo.xlsx` sigue en esta carpeta por si quieres crear la lista con **+ Nuevo > Lista > Desde Excel**: en ese caso, `Tipo` y `Estado` pasan a columnas de elección, `Solicitante` y `Aprobador` a columnas de persona, las fechas dejan de ser texto (sobran los `DateValue`) y el flujo de aprobación puede usar el desencadenador *Cuando se crea un elemento* en lugar de la programación.
